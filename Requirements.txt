@@ -1,0 +1,4 @@
+Required installs
+
+django
+whitenoise

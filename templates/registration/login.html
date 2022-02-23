@@ -1,0 +1,18 @@
+<!-- templates/login.html -->
+{% extends 'base.html' %}
+<link rel="stylesheet" type="text/css" href="E:/finalProject/static/css/Home.css">
+
+{% block title %}Login{% end-block %}
+
+{% block content %}
+<h2>Log In</h2>
+<form method="post">
+  <input name="username" id="username" placeholder="Username"/>
+
+  <input name="password" id="password" placeholder="Password">
+  {% csrf_token %}
+  <!--{{ form.as_p }}-->
+  <button type="submit">Log In</button>
+</form>
+{% end-block %}
+{% load static %}
