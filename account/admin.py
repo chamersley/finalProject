@@ -8,13 +8,9 @@ class AccountInLine(admin.StackedInline):
     can_delete = False
     verbose_name_plural = 'Accounts'
 
-
 class CustomizedUserAdmin (UserAdmin):
     inlines = (AccountInLine, )
 
 
 admin.site.unregister(User)
 admin.site.register(User, CustomizedUserAdmin)
-
-admin.site.register(createAccount)
-

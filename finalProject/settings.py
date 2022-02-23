@@ -25,31 +25,27 @@ SECRET_KEY = 'django-insecure-vfku7sk8i*3^phel)fpb&sj&9)xjw2$=bfops19t_u_j$7!jyy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'account.apps.ProfileConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'debug_toolbar',
     'django.contrib.sites',
     'django.contrib.sessions',
     'login',
     'profileLive',
-    'account.apps.ProfileConfig'
-
-
 ]
 
 SITE_ID = 1
 
 MIDDLEWARE = [
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -145,6 +141,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-#AUTH_USER_MODEL = "account.createAccount"
+#AUTH_USER_MODEL = 'account.createAccount'
 
 
