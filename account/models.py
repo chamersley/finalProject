@@ -1,7 +1,9 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from django import forms
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+from django.conf import settings
 from django.core.exceptions import ValidationError
 
 def onlyint(value):
@@ -19,7 +21,7 @@ class ourAccount(models.Model):
     phoneRegex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     empPhone = models.IntegerField(validators=[phoneRegex], blank=True)
 
-class createAccount(AbstractBaseUser, models.Model):
+class createAccount(models.Model):
     SALARYCHOICE = [
         'Yes', 'No'
     ]
@@ -28,8 +30,7 @@ class createAccount(AbstractBaseUser, models.Model):
         ('Male', 'Female')
     ]
 
-    user = models.OneToOneField(AbstractBaseUser, null=True, on_delete=models.CASCADE)
-    related = models.ForeignKey()
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     DOB = models.DateTimeField()
     gender = models.CharField(max_length=6, choices=GENDERCHOICE)
     startDate = models.DateField(max_length=8)
@@ -39,14 +40,14 @@ class createAccount(AbstractBaseUser, models.Model):
     sickTotal = models.DecimalField(max_digits=5, decimal_places=2)
 
     USERNAME_FIELD = 'user'
+    REQUIRED_FIELDS = []
+    is_anonymous = False
+    is_authenticated = True
 
     if areSalary == 'No':
         wage = models.DecimalField(max_digits=5, decimal_places=2)
     else:
         salary = models.DecimalField(max_digits=7, decimal_places=2)
-
-    class Meta:
-        abstract = True
 
     def __str__(self):
         return self.User.username
